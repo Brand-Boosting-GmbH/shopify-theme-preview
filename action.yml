@@ -12,6 +12,14 @@ inputs:
   shopify_cli_theme_token:
     description: 'Password generated from Theme Access app'
     required: true
+  build_step:
+    description: 'Command used as build step'
+    default: 'echo "No build step"'
+    required: false
+  dir:
+    description: 'Directory to preview.'
+    default: '.'
+    required: false
 runs:                   
   using: "composite"
   steps:
@@ -49,6 +57,12 @@ runs:
         bundler: 'latest'
     - name: Install Shopify CLI 
       run: npm install -g @shopify/cli @shopify/theme
+      shell: bash
+    - name: Build step 
+      run: '${{ inputs.build_step }}'
+      shell: bash
+    - name: Go to dist directory 
+      run: 'cd ${{ inputs.dir }}'
       shell: bash
     - name: Create Preview Link # and safe the returned value in an output object
       id: link
