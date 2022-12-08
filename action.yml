@@ -2,8 +2,9 @@
 # Brand Boosting GmbH | David Süßlin
 name: 'Create Theme Preview'
 description: 'This is a description'
-icon: shopping-cart
-color: green
+branding:
+  icon: shopping-cart
+  color: green
 inputs:
   shopify_flag_store:
     description: 'Store URL, like your-store.myshopify.com'
