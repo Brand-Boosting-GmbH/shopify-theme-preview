@@ -1,7 +1,7 @@
 # Github action to create a preview for pullrequests
 # Brand Boosting GmbH | David Süßlin
-name: 'Create Theme Preview'
-description: 'This is a description'
+name: 'Create Shopify Theme Preview'
+description: 'Create a Shopify Theme Preview'
 branding:
   icon: shopping-cart
   color: green
