@@ -1,4 +1,4 @@
-# Create Theme Preview
+# Create Shopify Theme Preview
 
 This GitHub action creates a preview of a pull request for a Shopify store. It makes it easier to see the changes made in a pull request before they are merged.
 
