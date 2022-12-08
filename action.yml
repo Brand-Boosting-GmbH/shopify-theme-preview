@@ -64,6 +64,15 @@ runs:
     - name: Go to dist directory 
       run: 'cd ${{ inputs.dir }}'
       shell: bash
+    - name: Create Preview Link # and safe the returned value in an output object 1
+      id: link
+      shell: bash
+      env:
+        # Store URL, like your-store.myshopify.com
+        SHOPIFY_FLAG_STORE: ${{ inputs.shopify_flag_store }}
+        # Password generated from Theme Access app
+        SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token}}
+      run: shopify theme push --unpublished --json --development
     - name: Create Preview Link # and safe the returned value in an output object
       id: link
       shell: bash
