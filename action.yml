@@ -65,7 +65,7 @@ runs:
       run: 'cd ${{ inputs.dir }}'
       shell: bash
     - name: Create Preview Link # and safe the returned value in an output object 1
-      id: link
+      id: link0
       shell: bash
       env:
         # Store URL, like your-store.myshopify.com
