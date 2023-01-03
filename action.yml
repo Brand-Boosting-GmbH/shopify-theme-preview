@@ -38,7 +38,7 @@ runs:
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
-          | ${{ inputs.SHOPIFY_FLAG_STORE }} | 🔄 Loading |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
+          | ${{ inputs.shopify_flag_store }} | 🔄 Loading |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
         
           *created by PotatoBot*
         edit-mode: replace
@@ -84,7 +84,7 @@ runs:
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
-          | ${{ inputs.SHOPIFY_FLAG_STORE }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
+          | ${{ inputs.shopify_flag_store }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
           
           ❌ 'Create Preview Link' failed ❌
 
@@ -109,7 +109,7 @@ runs:
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
-          | ${{ inputs.SHOPIFY_FLAG_STORE }} | ✅ Ready | <a href="${{ fromJSON(steps.temp.outputs.LINK).theme.preview_url }}" target="_blank">Preview</a> | [Editor](${{ fromJSON(steps.temp.outputs.LINK).theme.editor_url }}) | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
+          | ${{ inputs.shopify_flag_store }} | ✅ Ready | <a href="${{ fromJSON(steps.temp.outputs.LINK).theme.preview_url }}" target="_blank">Preview</a> | [Editor](${{ fromJSON(steps.temp.outputs.LINK).theme.editor_url }}) | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
         
           *created by PotatoBot*
         reactions: hooray
