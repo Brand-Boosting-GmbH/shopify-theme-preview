@@ -9,16 +9,19 @@ The action has the following steps:
 3. Check out the current pull request
 4. Set up Node.js and Ruby
 5. Install the Shopify CLI
-6. Use the Shopify CLI to create the preview and save the returned preview link in an output object
-7. Update the table to display the preview links
-8. If any of the previous steps fail, create a comment on the pull request with an error message
+6. Optional build step via `build-step`-input
+7. Use the Shopify CLI to create the preview and save the returned preview link in an output object (optional path via `dir`-input)
+8. Update the table to display the preview links
+9. If any of the previous steps fail, create a comment on the pull request with an error message
 
 
 ## Inputs
-| Name | Description | Example |
-| ---- | ----------- | ------- |
-| `shopify_flag_store` | Your Store URL | `your-store.myshopify.com` | 
-| `shopify_cli_theme_token` | Password generated from [Theme Access App](https://shopify.dev/themes/tools/theme-access) | `shptka_7e95eace43t00be7f9f8612325212805` |
+| Name | Description | Example | Required |
+| ---- | ----------- | ------- | :------: |
+| `shopify_flag_store` | Your Store URL | `your-store.myshopify.com` | [x] |
+| `shopify_cli_theme_token` | Password generated from [Theme Access App](https://shopify.dev/themes/tools/theme-access) | `shptka_7e95eace43t00be7f9f8612325212805` | [x] |
+| `build_step` | Command used as build step | `npm i` | [] |
+| `dir` | Directory to preview | `dist` | [] |
 
 
 ## Example usage
