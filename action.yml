@@ -18,7 +18,7 @@ inputs:
     required: false
   dir:
     description: 'Directory to preview.'
-    default: ''
+    default: '.'
     required: false
 runs:                   
   using: "composite"
