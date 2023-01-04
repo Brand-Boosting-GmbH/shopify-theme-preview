@@ -67,6 +67,9 @@ runs:
     - name: Go to dist directory 
       run: cd ${{ inputs.dir }}
       shell: bash
+    - name: Check Output and Delimiter
+      run: shopify theme push --unpublished --json --development
+      shell: bash
     - name: Create Preview Link # and safe the returned value in an output object
       id: link
       shell: bash
@@ -74,14 +77,11 @@ runs:
         # Store URL, like your-store.myshopify.com
         SHOPIFY_FLAG_STORE: ${{ inputs.shopify_flag_store }}
         # Password generated from Theme Access app
-        SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token}}
+        SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
       run: |
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
         shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
-    - name: Check Output and Delimiter
-      run: echo '${{ steps.link.outputs.JSON_RESPONSE }}'
-      shell: bash
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
         echo '${{ steps.link.outputs.JSON_RESPONSE }}' > 'temp.txt'
