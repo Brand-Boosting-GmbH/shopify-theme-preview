@@ -64,6 +64,12 @@ runs:
     - name: Build step 
       run: ${{ inputs.build_step }}
       shell: bash
+    - name: REMOVE package
+      run: find . -name "package.json" -exec rm -rf '{}' +;
+      shell: bash
+    - name: REMOVE package-lock
+      run: find . -name "package-lock.json" -exec rm -rf '{}' +;
+      shell: bash
     - name: Go to dist directory 
       run: cd ${{ inputs.dir }}
       shell: bash
