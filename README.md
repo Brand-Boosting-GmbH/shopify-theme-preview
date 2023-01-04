@@ -50,7 +50,8 @@ jobs:
 
 <p>After the action finished loading, the comment will be replaced with a table that contains the links for the Shopify store preview:</p>
 
-![image](https://user-images.githubusercontent.com/77160493/206173320-c68ae50a-5afa-48d7-bb70-690612cd1d58.png)
+![image](https://user-images.githubusercontent.com/77160493/210612083-000e254e-9706-4a05-bac3-ebae7fe07bcf.png)
+
 
 ## Composite action steps
 
