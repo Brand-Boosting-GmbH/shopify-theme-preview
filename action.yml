@@ -112,5 +112,5 @@ runs:
           - `shopify_cli_theme_token` [(?)](https://shopify.dev/themes/tools/theme-access)
           - `shopify_flag_store` 
 
-          *created by Brand Boosting GmbH | PotatoBot* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)
+          *created by Brand Boosting GmbH | PotatoBot* <p style="float: right;">[View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)</p>
         edit-mode: replace
