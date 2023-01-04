@@ -1,6 +1,7 @@
 # Create Shopify Theme Preview
 
-This GitHub action creates a preview of a pull request for a Shopify store. It makes it easier to see the changes made in a pull request before they are merged.
+This GitHub action creates a preview of a pull request for a Shopify store. Adding a simple comment in the corresponding pull request will trigger this action and creates links for a preview of the store and the shopify editor. This makes it easier to see the changes made in a pull request before they are merged.
+
 
 ## Inputs
 | Name | Description | Example | Required |
@@ -14,10 +15,14 @@ This GitHub action creates a preview of a pull request for a Shopify store. It m
 ## Example usage
 
 ### Create a preview link and add it to the comment
-The action searches for the `!preview` keyword in a pull request comment and replaces the entire comment with a table that includes a preview and editor link. The keyword can be changed to filter for a different string in the pull request comments. Remember to generate a `shopify_cli_theme_token` for the repository and pass it to the input of this action, along with the `shopify_flag_store`, which is your store URL.
+This Action can be triggered by adding the `!preview` keyword to a pull request comment. It will then replace the entire comment with a table that includes a preview and editor link. This keyword can be changed to filter for a different string in the pull request comments. Remember to generate a `shopify_cli_theme_token` for the repository and pass it to the input of this action, along with the `shopify_flag_store`, which is your store URL. 
+
+For more information on how to set up the `shopify_cli_theme_token` follow this [Theme Access App Guide](https://shopify.dev/themes/tools/theme-access)
 
 ### Optional inputs
-Optionally you can add more inputs to the composite action like `build_step` and `dir`. These inputs are used if there are specific requirements to preview the theme like a custom build step or changing the route to a different path before the preview is generated.
+Optionally you can add the inputs `build_step` and `dir` to the composite action. These inputs are used if there are specific requirements to preview the theme like a custom build step or changing the route to a different path before the preview is deployed.
+
+### preview.yml
 
 ```yaml
 run-name: Create Theme Preview by @${{ github.actor }}
@@ -38,11 +43,12 @@ jobs:
           dir: 'dist'                                       // optional
 
 ```
-<p>Just write a comment like this:</p>
+
+<p>To trigger the action write a comment with the defined keyword:</p>
 
 ![image](https://user-images.githubusercontent.com/77160493/206173680-5e960d83-807d-4205-9d25-b962e6a30091.png)
 
-<p>After the action finished loading, the table with the preview links should look like this:</p>
+<p>After the action finished loading, the comment will be replaced with a table that contains the links for the Shopify store preview:</p>
 
 ![image](https://user-images.githubusercontent.com/77160493/206173320-c68ae50a-5afa-48d7-bb70-690612cd1d58.png)
 
