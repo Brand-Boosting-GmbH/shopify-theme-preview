@@ -16,6 +16,9 @@ This GitHub action creates a preview of a pull request for a Shopify store. It m
 ### Create a preview link and add it to the comment
 The action searches for the `!preview` keyword in a pull request comment and replaces the entire comment with a table that includes a preview and editor link. The keyword can be changed to filter for a different string in the pull request comments. Remember to generate a `shopify_cli_theme_token` for the repository and pass it to the input of this action, along with the `shopify_flag_store`, which is your store URL.
 
+### Optional inputs
+Optionally you can add more inputs to the composite action like `build_step` and `dir`. These inputs are used if there are specific requirements to preview the theme like a custom build step or changing the route to a different path before the preview is generated.
+
 ```yaml
 run-name: Create Theme Preview by @${{ github.actor }}
 on:
@@ -25,7 +28,7 @@ jobs:
   deploy:
     name: Preview
     runs-on: ubuntu-latest
-    if: contains(github.event.comment.body, '!preview')     // change to filter for a different keyword
+    if: contains(github.event.comment.body, '!preview')
     steps:
       - uses: Brand-Boosting-GmbH/shopify-theme-preview@v1
         with:
