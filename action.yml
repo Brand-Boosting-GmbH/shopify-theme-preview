@@ -68,7 +68,7 @@ runs:
       run: cd ${{ inputs.dir }}
       shell: bash
     - name: Check Output and Delimiter
-      run: shopify theme push --unpublished --json --development
+      run: shopify theme push --unpublished --json --development || true
       shell: bash
       env:
         # Store URL, like your-store.myshopify.com
@@ -85,7 +85,7 @@ runs:
         SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
       run: |
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
-        shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT
+        shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT || true
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
