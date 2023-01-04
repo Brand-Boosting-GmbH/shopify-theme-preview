@@ -81,6 +81,7 @@ runs:
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Check Output and Delimiter
       run: echo '${{ steps.link.outputs.JSON_RESPONSE }}'
+      shell: bash
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
         echo '${{ steps.link.outputs.JSON_RESPONSE }}' > 'temp.txt'
