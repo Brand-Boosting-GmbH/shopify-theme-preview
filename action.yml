@@ -70,6 +70,11 @@ runs:
     - name: Check Output and Delimiter
       run: shopify theme push --unpublished --json --development
       shell: bash
+      env:
+        # Store URL, like your-store.myshopify.com
+        SHOPIFY_FLAG_STORE: ${{ inputs.shopify_flag_store }}
+        # Password generated from Theme Access app
+        SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
     - name: Create Preview Link # and safe the returned value in an output object
       id: link
       shell: bash
