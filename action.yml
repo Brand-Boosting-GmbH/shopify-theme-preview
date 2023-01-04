@@ -58,6 +58,9 @@ runs:
     - name: Install Shopify CLI 
       run: npm install -g @shopify/cli@latest @shopify/theme@latest
       shell: bash
+    - name: Check Version
+      run: shopify version
+      shell: bash
     - name: Build step 
       run: ${{ inputs.build_step }}
       shell: bash
@@ -76,24 +79,6 @@ runs:
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
         shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
-    - name: Output Step Failed # Create skeleton table and visualize failed state
-      if: ${{ failure() }}
-      uses: peter-evans/create-or-update-comment@v2
-      with:
-        comment-id: ${{ github.event.comment.id }}
-        body: |
-          | Name | Status | Preview | Editor | Date | Time |
-          | :--- | :----- | :------ | :------ | :------ | :----- |
-          | ${{ inputs.shopify_flag_store }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
-          
-          ❌ 'Create Preview Link' failed ❌
-
-          Please check if the following `inputs` are set correctly:
-          - `shopify_cli_theme_token` [(?)](https://shopify.dev/themes/tools/theme-access)
-          - `shopify_flag_store` 
-
-          *created by PotatoBot*
-        edit-mode: replace
     - run: |  # Safe output in a temporary txt file and extract the last line with requested links
         echo '${{ steps.link.outputs.JSON_RESPONSE }}' > 'temp.txt'
         echo 'LINK<<DEL' >> $GITHUB_OUTPUT
@@ -113,4 +98,22 @@ runs:
         
           *created by PotatoBot*
         reactions: hooray
+        edit-mode: replace
+    - name: Output Step Failed # Create skeleton table and visualize failed state
+      if: ${{ failure() }}
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        comment-id: ${{ github.event.comment.id }}
+        body: |
+          | Name | Status | Preview | Editor | Date | Time |
+          | :--- | :----- | :------ | :------ | :------ | :----- |
+          | ${{ inputs.shopify_flag_store }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
+          
+          ❌ 'Create Preview Link' failed ❌
+
+          Please check if the following `inputs` are set correctly:
+          - `shopify_cli_theme_token` [(?)](https://shopify.dev/themes/tools/theme-access)
+          - `shopify_flag_store` 
+
+          *created by PotatoBot*
         edit-mode: replace
