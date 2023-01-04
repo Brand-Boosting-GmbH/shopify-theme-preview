@@ -79,14 +79,16 @@ runs:
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
         shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
-    - run: |  # Safe output in a temporary txt file and extract the last line with requested links
+    - name: Check Output and Delimiter
+      run: echo '${{ steps.link.outputs.JSON_RESPONSE }}'
+    - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
+      run: |
         echo '${{ steps.link.outputs.JSON_RESPONSE }}' > 'temp.txt'
         echo 'LINK<<DEL' >> $GITHUB_OUTPUT
         tail -n1 temp.txt >> $GITHUB_OUTPUT
         echo 'DEL' >> $GITHUB_OUTPUT
       id: temp
       shell: bash
-      name: Format Data
     - name: Comment Link  # Override the loading comment from the start with the actual values and links
       uses: peter-evans/create-or-update-comment@v2
       with:
