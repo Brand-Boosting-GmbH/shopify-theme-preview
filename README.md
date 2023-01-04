@@ -18,10 +18,10 @@ The action has the following steps:
 ## Inputs
 | Name | Description | Example | Required |
 | ---- | ----------- | ------- | :------: |
-| `shopify_flag_store` | Your Store URL | `your-store.myshopify.com` | - [x] |
-| `shopify_cli_theme_token` | Password generated from [Theme Access App](https://shopify.dev/themes/tools/theme-access) | `shptka_7e95eace43t00be7f9f8612325212805` | - [x] |
-| `build_step` | Command used as build step | `npm i` | - [] |
-| `dir` | Directory to preview | `dist` | - [] |
+| `shopify_flag_store` | Your Store URL | `your-store.myshopify.com` | &check; |
+| `shopify_cli_theme_token` | Password generated from [Theme Access App](https://shopify.dev/themes/tools/theme-access) | `shptka_7e95eace43t00be7f9f8612325212805` | &check; |
+| `build_step` | Command used as build step | `npm i` | &cross; |
+| `dir` | Directory to preview | `dist` | &cross; |
 
 
 ## Example usage
