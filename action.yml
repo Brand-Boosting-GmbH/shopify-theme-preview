@@ -18,7 +18,7 @@ inputs:
     required: false
   dir:
     description: 'Directory to preview.'
-    default: '.'
+    default: ''
     required: false
 runs:                   
   using: "composite"
@@ -64,14 +64,6 @@ runs:
     - name: Build step 
       run: ${{ inputs.build_step }}
       shell: bash
-    - name: Check Output and Delimiter
-      run: shopify theme push --unpublished --json --development --verbose --path dist || true
-      shell: bash
-      env:
-        # Store URL, like your-store.myshopify.com
-        SHOPIFY_FLAG_STORE: ${{ inputs.shopify_flag_store }}
-        # Password generated from Theme Access app
-        SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
     - name: Create Preview Link # and safe the returned value in an output object
       id: link
       shell: bash
@@ -82,7 +74,7 @@ runs:
         SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
       run: |
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
-        shopify theme push --unpublished --json --development >> $GITHUB_OUTPUT || true
+        shopify theme push --unpublished --json --development --path ${{ inputs.dir}} >> $GITHUB_OUTPUT || true
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
