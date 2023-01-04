@@ -2,19 +2,6 @@
 
 This GitHub action creates a preview of a pull request for a Shopify store. It makes it easier to see the changes made in a pull request before they are merged.
 
-The action has the following steps:
-
-1. Get the current date and time
-2. Create a comment on the pull request for the loading state with a table containing the name of the store, the status of the preview creation, and the date and time of the action
-3. Check out the current pull request
-4. Set up Node.js and Ruby
-5. Install the Shopify CLI
-6. Optional build step via `build-step`-input
-7. Use the Shopify CLI to create the preview and save the returned preview link in an output object (optional path via `dir`-input)
-8. Update the table to display the preview links
-9. If any of the previous steps fail, create a comment on the pull request with an error message
-
-
 ## Inputs
 | Name | Description | Example | Required |
 | ---- | ----------- | ------- | :------: |
@@ -38,12 +25,15 @@ jobs:
   deploy:
     name: Preview
     runs-on: ubuntu-latest
-    if: contains(github.event.comment.body, '!preview')
+    if: contains(github.event.comment.body, '!preview')     // change to filter for a different keyword
     steps:
-      - uses: Brand-Boosting-GmbH/shopify-theme-preview@v5
+      - uses: Brand-Boosting-GmbH/shopify-theme-preview@v1
         with:
           shopify_flag_store: 'your-store.myshopify.com'
           shopify_cli_theme_token: 'shopify_cli_theme_token'
+          build_step: 'npm i && npm run build'              // optional
+          dir: 'dist'                                       // optional
+
 ```
 <p>Just write a comment like this:</p>
 
@@ -52,6 +42,20 @@ jobs:
 <p>After the action finished loading, the table with the preview links should look like this:</p>
 
 ![image](https://user-images.githubusercontent.com/77160493/206173320-c68ae50a-5afa-48d7-bb70-690612cd1d58.png)
+
+## Composite action steps
+
+The action has the following steps:
+
+1. Get the current date and time
+2. Create a comment on the pull request for the loading state with a table containing the name of the store, the status of the preview creation, and the date and time of the action
+3. Check out the current pull request
+4. Set up Node.js and Ruby
+5. Install the Shopify CLI
+6. Optional build step via `build-step`-input
+7. Use the Shopify CLI to create the preview and save the returned preview link in an output object (optional path via `dir`-input)
+8. Update the table to display the preview links
+9. If any of the previous steps fail, create a comment on the pull request with an error message
 
 ---
 <div style="display: inline">
