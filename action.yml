@@ -32,7 +32,7 @@ runs:
       run: echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
       shell: bash
     - name: Comment Loading # Create skeleton table and visualize loading state
-      uses: peter-evans/create-or-update-comment@v2
+      uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ github.event.comment.id }}
         body: |
@@ -42,13 +42,13 @@ runs:
         
           *created by Brand Boosting GmbH | PotatoBot* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)
         edit-mode: replace
-    - uses: actions/checkout@v3 # Action checkout@v3
+    - uses: actions/checkout@v4 # Action checkout@v4
     - name: Checkout Pull Request # Set the right branch for the commented PR
       run: hub pr checkout ${{ github.event.issue.number }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
       shell: bash
-    - uses: actions/setup-node@v3  # Action setup-node@v3
+    - uses: actions/setup-node@v4  # Action setup-node@v4
       with:
         node-version: 18
     - uses: ruby/setup-ruby@v1 # Action setup-ruby@v1
@@ -85,7 +85,7 @@ runs:
       id: temp
       shell: bash
     - name: Comment Link  # Override the loading comment from the start with the actual values and links
-      uses: peter-evans/create-or-update-comment@v2
+      uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ github.event.comment.id }}
         body: |
@@ -98,7 +98,7 @@ runs:
         edit-mode: replace
     - name: Output Step Failed # Create skeleton table and visualize failed state
       if: ${{ failure() }}
-      uses: peter-evans/create-or-update-comment@v2
+      uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ github.event.comment.id }}
         body: |
