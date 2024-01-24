@@ -27,6 +27,10 @@ Optionally you can add the inputs `build_step` and `dir` to the composite action
 
 ```yaml
 run-name: Create Theme Preview by @${{ github.actor }}
+
+permissions: 
+  pull-requests: write
+
 on:
   issue_comment:      
     types: [created]    
