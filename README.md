@@ -42,6 +42,7 @@ jobs:
           shopify_cli_theme_token: 'shopify_cli_theme_token'
           build_step: 'npm i && npm run build'              // optional
           dir: 'dist'                                       // optional
+          timezone: 'Europe/Berlin'                         // optional
 
 ```
 
