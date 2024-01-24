@@ -10,7 +10,7 @@ This GitHub action creates a preview of a pull request for a Shopify store. Addi
 | `shopify_cli_theme_token` | Password generated from [Theme Access App](https://shopify.dev/themes/tools/theme-access) | `shptka_7e95eace43t00be7f9f8612325212805` | &check; |
 | `build_step` | Command used as build step | `npm i` | &cross; |
 | `dir` | Directory to preview | `dist` | &cross; |
-| `timezone` | Timezone to use | `UTC+1` | &cross; |
+| `timezone` | Timezone to use (default is UTC) | `UTC+1` | &cross; |
 
 
 ## Example usage
