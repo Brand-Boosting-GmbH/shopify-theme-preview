@@ -44,7 +44,7 @@ runs:
         edit-mode: replace
     - uses: actions/checkout@v4 # Action checkout@v4
     - name: Checkout Pull Request # Set the right branch for the commented PR
-      run: hub pr checkout ${{ github.event.issue.number }}
+      run: gh pr checkout ${{ github.event.issue.number }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
       shell: bash
