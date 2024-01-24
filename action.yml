@@ -27,13 +27,12 @@ inputs:
 runs:                   
   using: "composite"
   steps:
-    - name: Set timezone
-      env:
-        TZ: ${{ inputs.timezone }}
     - name: Get Date  # Get current date
       id: date
-      run: echo "date=$(date +'%d-%m-%Y ')" >> $GITHUB_OUTPUT
       shell: bash
+      env:
+        TZ: ${{ inputs.timezone }}
+      run: echo "date=$(date +'%d-%m-%Y ')" >> $GITHUB_OUTPUT
     - name: Get Time  # Get current time
       id: time
       run: echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
