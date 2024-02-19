@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-//import * as exec from '@actions/exec'
+import * as exec from '@actions/exec'
 import * as github from '@actions/github'
 
 /**
@@ -80,7 +80,7 @@ export async function run(): Promise<void> {
 | :--- | :----- | :------ | :------ | :------ | :----- |
 | ${SHOPIFY_FLAG_STORE} | 🔄 Loading |  |  | ${date} | ${time}
 
-*created by Brand Boosting GmbH * [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)`
+*created by Brand Boosting GmbH* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)`
 
     const commentId = await createComment(
       octokit,
