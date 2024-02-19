@@ -1,10 +1,10 @@
 name: Lint Codebase
 
-on:
-  pull_request:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+  #pull_request:
+  #push:
+  #  branches:
+  #    - main
 
 permissions:
   contents: read
