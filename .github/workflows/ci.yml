@@ -55,11 +55,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          shopify_flag_store: 'test-store.myshopify.com'
-          shopify_cli_theme_token: 'shopify_cli_theme_token'
-          repository: 'test-repo'
-          pull_request_number: '1'
+          milliseconds: 2000
 
       - name: Print Output
         id: output
-        run: echo "CI completed successfully"
+        run: echo "${{ steps.test-action.outputs.time }}"
