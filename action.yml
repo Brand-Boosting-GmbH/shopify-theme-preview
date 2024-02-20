@@ -109,6 +109,8 @@ runs:
       with:
         comment-id: ${{ steps.create-comment.outputs.comment-id }}
         body: |
+          Shopify Theme Preview
+
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
           | ${{ inputs.shopify_flag_store }} | ✅ Ready | <a href="${{ fromJSON(steps.temp.outputs.LINK).theme.preview_url }}" target="_blank">Preview</a> | [Editor](${{ fromJSON(steps.temp.outputs.LINK).theme.editor_url }}) | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
@@ -123,6 +125,8 @@ runs:
         comment-id: ${{ steps.create-comment.outputs.comment-id }}
         issue-number: ${{ github.event.issue.number || github.event.pull_request.numberr }}
         body: |
+          Shopify Theme Preview
+
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
           | ${{ inputs.shopify_flag_store }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
