@@ -51,13 +51,13 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      #- name: Test Local Action
-      #  id: test-action
-      #  uses: ./
-      #  with:
-      #    shopify_flag_store: 'test-store.myshopify.com'
-      #   shopify_cli_theme_token: 'shopify_cli_theme_token'
-      #   pull_request_number: 1
+      - name: Test Local Action
+        id: test-action
+        uses: ./
+        with:
+          shopify_flag_store: 'test-store.myshopify.com'
+          shopify_cli_theme_token: 'shopify_cli_theme_token'
+          pull_request_number: 1
 
       - name: Print Output
         id: output
