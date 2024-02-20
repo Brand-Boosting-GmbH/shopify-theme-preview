@@ -24,10 +24,6 @@ inputs:
     description: "TZ identifier"
     required: false
     default: "UTC"
-  replace-comment:
-    description: "When using issue_comment event, replace the comment instead of creating a new one. Default is false."
-    required: false
-    default: false
 
 runs:
   using: "composite"
@@ -45,26 +41,16 @@ runs:
       run: echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
       shell: bash
     - name: Find Comment
-      if: github.event_name == 'issue_comment' && inputs.replace-comment == true
-      id: get-comment-id
-      run: echo "comment-id=${{ github.event.comment.id }}" >> $GITHUB_ENV
-    - name: Find Comment
-      if: github.event_name != 'issue_comment' || inputs.replace-comment != true
       uses: peter-evans/find-comment@v3
       id: find-comment
       with:
         issue-number: ${{ github.event.pull_request.number }}
         comment-author: "github-actions[bot]"
         body-includes: Shopify Theme Preview
-      shell: bash
-      run: echo "comment-id=${{ steps.find-comment.outputs.comment-id }}" >> $GITHUB_ENV
-    - name: print comment id
-      shell: bash
-      run: echo $comment-id
     - name: Comment Loading # Create skeleton table and visualize loading state
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
-        comment-id: ${{ github.event.comment.id }}
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
         body: |
           Shopify Theme Preview
 
