@@ -16,15 +16,11 @@ inputs:
     description: 'Password generated from Theme Access app'
     required: true
   repository:
-    description:
-      'The full name of the repository in which to create or update a comment.'
-    default: ${{ github.repository }}
+    description: 'Repository'
+    required: true
   pull_request_number:
     description: 'Pull request number'
     required: true
-  token:
-    description: 'GITHUB_TOKEN or a repo scoped PAT.'
-    default: ${{ github.token }}
   build_step:
     description: 'Command used as build step'
     default: 'echo "No build step"'

@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 //import * as exec from '@actions/exec'
-import * as github from '@actions/github'
+import { Octokit } from '@octokit/rest'
 
 /**
  * The main function for the action.
@@ -23,7 +23,6 @@ export async function run(): Promise<void> {
         required: true
       })
     )
-    const TOKEN = core.getInput('token', { required: true })
 
     // get time and date with timezone
 
@@ -43,7 +42,7 @@ export async function run(): Promise<void> {
       minute: '2-digit'
     })
 
-    const octokit = github.getOctokit(TOKEN)
+    const octokit = new Octokit({ auth: 'YOUR_GITHUB_TOKEN' })
     const owner = REPOSITORY.split('/')[0]
     const repo = REPOSITORY.split('/')[1]
 
@@ -99,7 +98,7 @@ export async function run(): Promise<void> {
 }
 
 async function createComment(
-  octokit: ReturnType<(typeof github)['getOctokit']>,
+  octokit: Octokit,
   owner: string,
   repo: string,
   issueNumber: number,
