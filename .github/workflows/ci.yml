@@ -57,7 +57,8 @@ jobs:
         with:
           shopify_flag_store: 'test-store.myshopify.com'
           shopify_cli_theme_token: 'shopify_cli_theme_token'
-          pull_request_number: 1
+          repository: 'test-repo'
+          pull_request_number: '1'
 
       - name: Print Output
         id: output
