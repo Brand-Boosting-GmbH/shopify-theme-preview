@@ -48,10 +48,11 @@ runs:
         comment-author: "github-actions[bot]"
         body-includes: "Shopify Theme Preview"
     - name: Comment Loading # Create skeleton table and visualize loading state
-      id: couc
+      id: create-comment
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
         body: |
           Shopify Theme Preview
 
@@ -106,7 +107,7 @@ runs:
     - name: Comment Link # Override the loading comment from the start with the actual values and links
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
-        comment-id: ${{ steps.couc.outputs.comment-id }}
+        comment-id: ${{ steps.create-comment.outputs.comment-id }}
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
@@ -119,7 +120,7 @@ runs:
       if: ${{ failure() }}
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
-        comment-id: ${{ steps.couc.outputs.comment-id }}
+        comment-id: ${{ steps.create-comment.outputs.comment-id }}
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
