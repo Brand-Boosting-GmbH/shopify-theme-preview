@@ -121,6 +121,7 @@ runs:
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ steps.create-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
