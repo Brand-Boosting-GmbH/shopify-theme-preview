@@ -1,41 +1,41 @@
 # Github action to create a preview for pullrequests
 # Brand Boosting GmbH | David Süßlin
-name: 'Create Shopify Theme Preview'
-description: 'Create a Shopify Theme Preview'
+name: "Create Shopify Theme Preview"
+description: "Create a Shopify Theme Preview"
 branding:
   icon: shopping-cart
   color: green
 inputs:
   shopify_flag_store:
-    description: 'Store URL, like your-store.myshopify.com'
+    description: "Store URL, like your-store.myshopify.com"
     required: true
   shopify_cli_theme_token:
-    description: 'Password generated from Theme Access app'
+    description: "Password generated from Theme Access app"
     required: true
   build_step:
-    description: 'Command used as build step'
+    description: "Command used as build step"
     default: 'echo "No build step"'
     required: false
   dir:
-    description: 'Directory to preview.'
-    default: '.'
+    description: "Directory to preview."
+    default: "."
     required: false
   timezone:
     description: "TZ identifier"
     required: false
     default: "UTC"
-runs:                   
+runs:
   using: "composite"
   steps:
     - name: Set timezone
       uses: szenius/set-timezone@v1.2
       with:
         timezoneLinux: ${{ inputs.timezone }}
-    - name: Get Date  # Get current date
+    - name: Get Date # Get current date
       id: date
       shell: bash
       run: echo "date=$(date +'%d-%m-%Y ')" >> $GITHUB_OUTPUT
-    - name: Get Time  # Get current time
+    - name: Get Time # Get current time
       id: time
       run: echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
       shell: bash
@@ -47,7 +47,7 @@ runs:
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
           | ${{ inputs.shopify_flag_store }} | 🔄 Loading |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
-        
+
           *created by Brand Boosting GmbH | PotatoBot* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)
         edit-mode: replace
     - uses: actions/checkout@v4 # Action checkout@v4
@@ -56,20 +56,20 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       shell: bash
-    - uses: actions/setup-node@v4  # Action setup-node@v4
+    - uses: actions/setup-node@v4 # Action setup-node@v4
       with:
         node-version: 18
     - uses: ruby/setup-ruby@v1 # Action setup-ruby@v1
       with:
         ruby-version: 3.1
-        bundler: 'latest'
-    - name: Install Shopify CLI 
+        bundler: "latest"
+    - name: Install Shopify CLI
       run: npm install -g @shopify/cli@latest @shopify/theme@latest
       shell: bash
     - name: Check Version
       run: shopify version
       shell: bash
-    - name: Build step 
+    - name: Build step
       run: ${{ inputs.build_step }}
       shell: bash
     - name: Create Preview Link # and safe the returned value in an output object
@@ -82,7 +82,7 @@ runs:
         SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
       run: |
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
-        shopify theme push --unpublished --json --development --path ${{ inputs.dir}} >> $GITHUB_OUTPUT || true
+        shopify theme push --json --development --path ${{ inputs.dir}} >> $GITHUB_OUTPUT || true
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
@@ -92,7 +92,7 @@ runs:
         echo 'DEL' >> $GITHUB_OUTPUT
       id: temp
       shell: bash
-    - name: Comment Link  # Override the loading comment from the start with the actual values and links
+    - name: Comment Link # Override the loading comment from the start with the actual values and links
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ github.event.comment.id }}
@@ -100,7 +100,7 @@ runs:
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
           | ${{ inputs.shopify_flag_store }} | ✅ Ready | <a href="${{ fromJSON(steps.temp.outputs.LINK).theme.preview_url }}" target="_blank">Preview</a> | [Editor](${{ fromJSON(steps.temp.outputs.LINK).theme.editor_url }}) | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
-        
+
           *created by Brand Boosting GmbH | PotatoBot* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)
         reactions: hooray
         edit-mode: replace
@@ -113,7 +113,7 @@ runs:
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
           | ${{ inputs.shopify_flag_store }} | ❌ Failed |  |  | ${{ steps.date.outputs.date }} | ${{ steps.time.outputs.time }}
-          
+
           ❌ 'Create Preview Link' failed ❌
 
           Please check if the following `inputs` are set correctly:
