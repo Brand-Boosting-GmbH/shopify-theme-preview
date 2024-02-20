@@ -44,9 +44,5 @@ outputs:
     description: 'Your output description here'
 
 runs:
-  - uses: ruby/setup-ruby@v1 # Action setup-ruby@v1
-    with:
-      ruby-version: 3.1
-      bundler: 'latest'
   using: node20
   main: dist/index.js

@@ -28960,6 +28960,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
+//import * as exec from '@actions/exec'
 const github = __importStar(__nccwpck_require__(5438));
 /**
  * The main function for the action.
@@ -29029,7 +29030,7 @@ async function run() {
 | :--- | :----- | :------ | :------ | :------ | :----- |
 | ${SHOPIFY_FLAG_STORE} | 🔄 Loading |  |  | ${date} | ${time}
 
-*created by Brand Boosting GmbH* [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)`;
+*created by Brand Boosting GmbH * [View on GitHub Marketplace](https://github.com/marketplace/actions/create-shopify-theme-preview)`;
         const commentId = await createComment(octokit, owner, repo, PULL_REQUEST_NUMBER, commentBody);
         // Set the comment ID as an output
         core.setOutput('comment_id', commentId);
