@@ -56,8 +56,10 @@ runs:
         issue-number: ${{ github.event.pull_request.number }}
         comment-author: "github-actions[bot]"
         body-includes: Shopify Theme Preview
+      shell: bash
       run: echo "comment-id=${{ steps.find-comment.outputs.comment-id }}" >> $GITHUB_ENV
     - name: print comment id
+      shell: bash
       run: echo $comment-id
     - name: Comment Loading # Create skeleton table and visualize loading state
       uses: peter-evans/create-or-update-comment@v3.1.0
