@@ -15,12 +15,6 @@ inputs:
   shopify_cli_theme_token:
     description: 'Password generated from Theme Access app'
     required: true
-  repository:
-    description: 'Repository'
-    required: true
-  pull_request_number:
-    description: 'Pull request number'
-    required: true
   build_step:
     description: 'Command used as build step'
     default: 'echo "No build step"'
