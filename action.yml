@@ -44,7 +44,7 @@ runs:
       uses: peter-evans/find-comment@v3
       id: find-comment
       with:
-        issue-number: ${{ github.event.pull_request.number }}
+        issue-number: ${{ github.event.issue.number || github.event.pull_request.number }}
         comment-author: "github-actions[bot]"
         body-includes: "Shopify Theme Preview"
     - name: Comment Loading # Create skeleton table and visualize loading state
@@ -52,7 +52,7 @@ runs:
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ steps.find-comment.outputs.comment-id }}
-        issue-number: ${{ github.event.pull_request.number }}
+        issue-number: ${{ github.event.issue.number || github.event.pull_request.number }}
         body: |
           Shopify Theme Preview
 
@@ -64,7 +64,7 @@ runs:
         edit-mode: replace
     - uses: actions/checkout@v4 # Action checkout@v4
     - name: Checkout Pull Request # Set the right branch for the commented PR
-      run: gh pr checkout ${{ github.event.issue.number }}
+      run: gh pr checkout ${{ github.event.issue.number || github.event.pull_request.number }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
       shell: bash
@@ -121,7 +121,7 @@ runs:
       uses: peter-evans/create-or-update-comment@v3.1.0
       with:
         comment-id: ${{ steps.create-comment.outputs.comment-id }}
-        issue-number: ${{ github.event.pull_request.number }}
+        issue-number: ${{ github.event.issue.number || github.event.pull_request.numberr }}
         body: |
           | Name | Status | Preview | Editor | Date | Time |
           | :--- | :----- | :------ | :------ | :------ | :----- |
