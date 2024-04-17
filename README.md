@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.comment.body, '!preview')
     steps:
-      - uses: Brand-Boosting-GmbH/shopify-theme-preview@v1.2.0
+      - uses: Brand-Boosting-GmbH/shopify-theme-preview@v1.2.1
         with:
           shopify_flag_store: 'your-store.myshopify.com'
           shopify_cli_theme_token: 'shopify_cli_theme_token'
