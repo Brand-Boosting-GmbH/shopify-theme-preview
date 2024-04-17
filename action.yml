@@ -76,7 +76,7 @@ runs:
         ruby-version: 3.1
         bundler: "latest"
     - name: Install Shopify CLI
-      run: npm install -g @shopify/cli@latest @shopify/theme@latest
+      run: npm install -g @shopify/cli@3.58.2 @shopify/theme@3.58.2
       shell: bash
     - name: Check Version
       run: shopify version
