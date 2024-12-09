@@ -29,6 +29,7 @@ Optionally you can add the inputs `build_step` and `dir` to the composite action
 run-name: Create Theme Preview by @${{ github.actor }}
 
 permissions: 
+  contents: read
   pull-requests: write
 
 on:
