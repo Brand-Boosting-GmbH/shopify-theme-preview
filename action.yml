@@ -76,7 +76,7 @@ runs:
         ruby-version: 3.1
         bundler: "latest"
     - name: Install Shopify CLI
-      run: npm install -g @shopify/cli@3.58.2 @shopify/theme@3.58.2
+      run: npm install -g @shopify/cli@3.68.1
       shell: bash
     - name: Check Version
       run: shopify version
@@ -94,7 +94,7 @@ runs:
         SHOPIFY_CLI_THEME_TOKEN: ${{ inputs.shopify_cli_theme_token }}
       run: |
         echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
-        shopify theme push --json --development --path ${{ inputs.dir}} >> $GITHUB_OUTPUT || true
+        shopify theme push --json --development --path --legacy ${{ inputs.dir}} >> $GITHUB_OUTPUT || true
         echo 'EOF' >> $GITHUB_OUTPUT
     - name: Format Data # Safe output in a temporary txt file and extract the last line with requested links
       run: |
